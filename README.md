@@ -2,7 +2,11 @@
 
 This repository contains the data project —[datasources](./datasources) and [endpoints](./endpoints)— and [script](./script) for a UX personalization example using Tinybird.
 
+In this example, we adjust the order of images on a website based on realtime sales or website clicks. This [Observable app](https://observablehq.com/@3c8ed2c9862da582/ux-personalization) shows the idea.
+
 Check out this [video](https://youtu.be/YsPYObGz2IU ) of the live-coding session walking you through the whole process.
+
+
 
 To clone the repository:
 
