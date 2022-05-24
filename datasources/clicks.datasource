@@ -1,0 +1,8 @@
+
+SCHEMA >
+    `article_id` Int64 `json:$.article_id`,
+    `timestamp` DateTime64(3) `json:$.timestamp`
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYear(timestamp)"
+ENGINE_SORTING_KEY "timestamp, article_id"

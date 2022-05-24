@@ -1,0 +1,10 @@
+
+SCHEMA >
+    `datetime` DateTime `json:$.datetime`,
+    `customer_id` String `json:$.customer_id`,
+    `article_id` Int64 `json:$.article_id`,
+    `price` Float32 `json:$.price`
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYear(datetime)"
+ENGINE_SORTING_KEY "article_id, datetime"

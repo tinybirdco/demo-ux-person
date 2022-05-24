@@ -1,0 +1,12 @@
+NODE check_0
+SQL >
+
+    SELECT
+      count() c,
+      min(datetime) as start,
+      max(datetime) as latest,  
+      round(c/(latest-start),0) as rate_per_sec,
+      round((latest-start)/60,0) as minutes_taken
+    FROM sales
+
+
