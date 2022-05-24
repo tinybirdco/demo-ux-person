@@ -177,12 +177,12 @@ Use node version 16.14.0
 nvm use 16
 git clone git@github.com:tinybirdco/commerce.git
 cd commerce
-npm install
 git stash
 git checkout live_coding
+npm install
 vim .env.local  # add your ux_demo token
-        NEXT_PUBLIC_TINYBIRD_API_2=https://api.tinybird.co
-        NEXT_PUBLIC_TINYBIRD_TOKEN_2=< your ux_demo token >
+        NEXT_PUBLIC_TINYBIRD_API_2=https://api.tinybird.co  # or https://ui.us-east.tinybird.co
+        NEXT_PUBLIC_TINYBIRD_TOKEN_2=< token >
 npm run dev
 ```
 
