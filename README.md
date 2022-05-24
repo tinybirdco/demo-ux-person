@@ -66,7 +66,7 @@ Push the data project —datasources, pipes and fixtures— to your workspace
 ```bash
 tb push --fixtures
 ```
-You will something like this:
+You will see something like this:
 ```
 ** Processing ./datasources/shoes_and_shirts.datasource
 ** Processing ./datasources/clicks.datasource
