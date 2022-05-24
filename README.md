@@ -6,9 +6,9 @@ Check out this [video](https://youtu.be/YsPYObGz2IU ) of the live-coding session
 
 To clone the repository:
 
-`git clone git@github.com:tinybirdco/demo-ux-perso.git`
+`git clone git@github.com:tinybirdco/demo-ux-person.git`
 
-`cd demo-ux-perso`
+`cd demo-ux-person`
 
 ## Working with the Tinybird CLI
 
@@ -114,7 +114,7 @@ python3 script/hfi_sales.py
 ```
 Leave this running while you look at the website to see changing rankings.
 
-## Uploading from a local CV.
+## Uploading from a local CSV
 
 Download articles.csv from the Kaggle competition [H&M Personalized Fashion Recommendations](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data). Upload this via the UI and append to the articles Data Source.
 
