@@ -180,8 +180,8 @@ cd commerce
 git stash
 git checkout live_coding
 npm install
-vim .env.local  # add your ux_demo token
-        NEXT_PUBLIC_TINYBIRD_API_2=https://api.tinybird.co  # or https://ui.us-east.tinybird.co
+vim .env.local  # add your region and ux_demo token
+        NEXT_PUBLIC_TINYBIRD_API_2=https://api.tinybird.co  # or https://api.us-east.tinybird.co
         NEXT_PUBLIC_TINYBIRD_TOKEN_2=< token >
 npm run dev
 ```
