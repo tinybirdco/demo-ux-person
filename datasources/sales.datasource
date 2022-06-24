@@ -2,8 +2,7 @@
 SCHEMA >
     `datetime` DateTime `json:$.datetime`,
     `customer_id` String `json:$.customer_id`,
-    `article_id` Int64 `json:$.article_id`,
-    `price` Float32 `json:$.price`
+    `article_id` Int64 `json:$.article_id`
 
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toYear(datetime)"

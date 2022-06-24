@@ -2,8 +2,10 @@ NODE filter_prods
 SQL >
 
     %
-    SELECT * FROM shoes_and_shirts
-    WHERE category = {{String(categ, 'shoes', description="desired product category")}}
+        SELECT article_id FROM articles
+        {% if defined(categ) %}
+        WHERE category = {{String(categ, description="desired product category")}}
+        {% end %}
 
 
 
@@ -11,18 +13,18 @@ NODE sales_ranking
 SQL >
 
     %
-    SELECT
-        article_id,
-        count() AS total
-    FROM sales
-    WHERE article_id IN (
-        SELECT article_id from filter_prods
-      )
-    AND toDateTime(datetime) < (
-      SELECT min(datetime) FROM sales
-      ) + interval {{Int8(start_minute, 100, description='latest minute from sales')}} minute
-    GROUP BY article_id
-    ORDER BY total DESC
+        SELECT
+            article_id,
+            count() AS total
+        FROM sales
+        WHERE article_id IN (
+            SELECT article_id from filter_prods
+          )
+        AND toDateTime(datetime) < (
+          SELECT min(datetime) FROM sales
+          ) + interval {{Int8(start_minute, 100, description='latest minute from sales')}} minute
+        GROUP BY article_id
+        ORDER BY total DESC
 
 
 
@@ -30,15 +32,14 @@ NODE clicks_ranking
 SQL >
 
     %
-    SELECT
-      article_id,
-      count() as total
-    FROM clicks
-    WHERE  article_id IN (SELECT article_id from filter_prods)
-    AND toDateTime(timestamp) > now() - interval 2 hour
-    GROUP BY article_id
-    ORDER BY total DESC
-
+        SELECT
+          article_id,
+          count() as total
+        FROM clicks
+        WHERE  article_id IN (SELECT article_id from filter_prods)
+        AND toDateTime(timestamp) > now() - interval 2 hour
+        GROUP BY article_id
+        ORDER BY total DESC
 
 
 
@@ -46,22 +47,22 @@ NODE ranking
 SQL >
 
     %
-      SELECT *
-      {%if defined(ranking) and String(ranking, description="clicks or sales") == 'clicks' %}
-      FROM clicks_ranking rank
-      {%else%}
-      FROM sales_ranking rank
-      {%end%}
-      UNION ALL
-        SELECT article_id,0
-        FROM filter_prods
-        WHERE article_id not in (SELECT article_id
-        {%if defined(ranking) and String(ranking, description="clicks or sales") == 'clicks' %}
-        FROM clicks_ranking rank
-        {%else%}
-        FROM sales_ranking rank
-        {%end%}
-        )
+          SELECT *
+          {%if defined(ranking) and String(ranking, description="clicks or sales") == 'clicks' %}
+          FROM clicks_ranking rank
+          {%else%}
+          FROM sales_ranking ranktb
+          {%end%}
+          UNION ALL
+            SELECT article_id,0
+            FROM filter_prods
+            WHERE article_id not in (SELECT article_id
+            {%if defined(ranking) and String(ranking, description="clicks or sales") == 'clicks' %}
+            FROM clicks_ranking rank
+            {%else%}
+            FROM sales_ranking rank
+            {%end%}
+            )
 
 
 
@@ -69,14 +70,13 @@ NODE endpoint
 SQL >
 
     %
-    SELECT
-      rank.article_id as partnumber,
-      rank.total as total,
-      a.prod_name as name,
-      b.price as basic_price,
-      concat('https://lh3.googleusercontent.com/d/',b.image) as image
-    FROM ranking as rank
-    JOIN articles a ON a.article_id=rank.article_id
-    JOIN shoes_and_shirts b ON b.article_id=rank.article_id
+        SELECT
+          rank.article_id as partnumber,
+          rank.total as total,
+          a.prod_name as name,
+          a.price as basic_price,
+          concat('https://lh3.googleusercontent.com/d/',a.image) as image
+        FROM ranking as rank
+        JOIN articles a ON a.article_id=rank.article_id
 
 

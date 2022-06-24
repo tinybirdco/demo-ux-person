@@ -1,31 +1,12 @@
 
 SCHEMA >
     `article_id` Int64,
-    `product_code` Int64,
-    `prod_name` String,
-    `product_type_no` Int32,
-    `product_type_name` String,
-    `product_group_name` String,
-    `graphical_appearance_no` Int64,
-    `graphical_appearance_name` String,
-    `colour_group_code` Int16,
-    `colour_group_name` String,
-    `perceived_colour_value_id` Int16,
-    `perceived_colour_value_name` String,
-    `perceived_colour_master_id` Int16,
-    `perceived_colour_master_name` String,
-    `department_no` Int32,
-    `department_name` String,
-    `index_code` String,
-    `index_name` String,
-    `index_group_no` Int16,
-    `index_group_name` String,
-    `section_no` Int16,
-    `section_name` String,
-    `garment_group_no` Int32,
-    `garment_group_name` String,
-    `detail_desc` String
+    `image` String,
+    `category` String,
+    `price` Float32,
+    `prod_name` String
+
 
 ENGINE "MergeTree"
-ENGINE_PARTITION_KEY "substring(toString(article_id), 1, 1)"
-ENGINE_SORTING_KEY "article_id, garment_group_no, garment_group_name, detail_desc"
+ENGINE_PARTITION_KEY "tuple()"
+ENGINE_SORTING_KEY "category, price, article_id"
